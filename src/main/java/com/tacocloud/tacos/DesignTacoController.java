@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tacocloud.tacos.domain.Ingredient;
 import com.tacocloud.tacos.domain.Ingredient.Type;
@@ -25,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/design")
 @Slf4j
+@SessionAttributes("tacoOrder")
 public class DesignTacoController {
 	
 	@Autowired
@@ -78,13 +81,19 @@ public class DesignTacoController {
 	
 	
 	@PostMapping
-	public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+	public String processTaco(Taco taco
+					, @ModelAttribute TacoOrder tacoOrder
+					, RedirectAttributes redirectAttributes) {
 		
 		tacoOrder.addTaco(taco);
+//		redirectAttributes.addAttribute(tacoOrder)
 		
 		log.info("Processing taco: {}", taco);
+		tacoOrder.getTacos().stream().forEach(x -> {
+			log.info("In tacoOrder: {}", x);
+		});
 		
-		return "redirect:/home";
+		return "redirect:/orders/current";
 	}
 
 }

@@ -27,11 +27,12 @@ public class Ingredient {
 	
 	private String name;
 	
+//	@Enumerated(EnumType.STRING) // Use Converter instead -> WRONG: không liên quan đến Converter!!!!!
 	@Enumerated(EnumType.STRING)
 	private Type type;
 	
 	
 	public enum Type {
-		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE
+		WRAP, PROTEIN, VEGGIES, CHEESE, SAUCE 
 	}
 }
