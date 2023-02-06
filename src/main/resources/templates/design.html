@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Taco Cloud</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <h1 >Design your taco!</h1>
+        </div>
+
+		<div class="row">
+            <img th:src="@{/images/TacoCloud.jpg}" alt="">
+        </div>
+
+        <div class="row">
+            <form class="w-100 container" action="" method="post" th:object="${taco}">
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Designate your wrap:</h3>
+                        <div th:each="ingredient: ${wrap}">
+	                        <input type="checkbox" name="" id="" th:value="${ingredient.id}">
+	                        <span th:text="${ingredient.name}">INGREDIENTS</span>
+                        </div>
+                        
+
+                    </div>
+
+
+                    <div class="col-6">
+                        <h3>Designate your cheese:</h3>
+                        <div th:each="ingredient: ${cheese}">
+	                        <input type="checkbox" name="" id="" th:value="${ingredient.id}">
+	                        <span th:text="${ingredient.name}">INGREDIENTS</span>
+                        </div>
+                        
+
+                    </div>
+
+                    <div class="col-6">
+                        <h3>Designate your wrap:</h3>
+                        <input type="checkbox" name="" id="">
+                        <span>INGREDIENTS</span>
+
+                    </div>
+
+
+                </div>
+
+            </form>
+        </div>
+
+
+        <div class="row">
+            <h4>Name your taco creation:</h4>
+            <input type="text" name="" id="">
+        </div>
+
+        <div class="row">
+            <button class="btn btn-primary" type="submit">Submit Your Taco</button>
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
