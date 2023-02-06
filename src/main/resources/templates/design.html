@@ -25,36 +25,14 @@
 
         <div class="row">
             <form class="w-100 container" action="" method="post" th:object="${taco}">
-                <div class="row">
-                    <div class="col-6">
-                        <h3>Designate your wrap:</h3>
-                        <div th:each="ingredient: ${wrap}">
-	                        <input type="checkbox" name="" id="" th:value="${ingredient.id}">
-	                        <span th:text="${ingredient.name}">INGREDIENTS</span>
-                        </div>
-                        
-
+                <div class="row" >
+                    <div class="col-6" th:each="ingre : ${ingreMap}">
+                        <h3>Designate your <span th:text="${ingre.key}"></span>:</h3>
+                        <div th:each="item: ${ingre.value}">
+	                        <input type="checkbox" name="" id="" th:value="${item.id}">
+	                        <span th:text="${item.name}">INGREDIENTS</span>
+                        </div>                    
                     </div>
-
-
-                    <div class="col-6">
-                        <h3>Designate your cheese:</h3>
-                        <div th:each="ingredient: ${cheese}">
-	                        <input type="checkbox" name="" id="" th:value="${ingredient.id}">
-	                        <span th:text="${ingredient.name}">INGREDIENTS</span>
-                        </div>
-                        
-
-                    </div>
-
-                    <div class="col-6">
-                        <h3>Designate your wrap:</h3>
-                        <input type="checkbox" name="" id="">
-                        <span>INGREDIENTS</span>
-
-                    </div>
-
-
                 </div>
 
             </form>

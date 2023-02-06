@@ -1,6 +1,8 @@
 package com.tacocloud.tacos;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -27,17 +29,24 @@ public class DesignTacoController {
 	@Autowired
 	private IngredientRepository ingredientRepository;
 	
+	
+	/* NOTES: change from add each ingredient into a hashmap -> reduce repeated div in html */
 	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
 		
 		List<Ingredient> ingredients = ingredientRepository.findAll();
 		
+		Map<String, List<Ingredient>> ingreMap = new HashMap<String, List<Ingredient>>();
+		
 		Type[] types = Ingredient.Type.values();
 		
 		for (Type type: types) {
-			model.addAttribute(type.toString().toLowerCase()
-					, filterByType(ingredients, type));
+//			model.addAttribute(type.toString().toLowerCase()
+//					, filterByType(ingredients, type));
+			ingreMap.put(type.name().toLowerCase(), (List<Ingredient>) filterByType(ingredients, type));
 		}
+		
+		model.addAttribute("ingreMap", ingreMap);
 		
 	}
 	
