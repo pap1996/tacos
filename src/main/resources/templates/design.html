@@ -24,28 +24,31 @@
         </div>
 
         <div class="row">
-            <form class="w-100 container" action="" method="post" th:object="${taco}">
+            <form id="designTacos" class="w-100 container" action="" method="post" th:object="${taco}">
                 <div class="row" >
                     <div class="col-6" th:each="ingre : ${ingreMap}">
                         <h3>Designate your <span th:text="${ingre.key}"></span>:</h3>
                         <div th:each="item: ${ingre.value}">
-	                        <input type="checkbox" name="" id="" th:value="${item.id}">
+	                        <input th:field="*{ingredients}" type="checkbox" name="" id="" th:value="${item.id}">
 	                        <span th:text="${item.name}">INGREDIENTS</span>
                         </div>                    
                     </div>
                 </div>
 
+
+ 				<div class="row">
+            		<h4>Name your taco creation:</h4>
+            		<input th:field="*{name}" type="text" name="" id="">
+        		</div>
+        		
             </form>
         </div>
 
 
-        <div class="row">
-            <h4>Name your taco creation:</h4>
-            <input type="text" name="" id="">
-        </div>
+       
 
         <div class="row">
-            <button class="btn btn-primary" type="submit">Submit Your Taco</button>
+            <button form="designTacos" class="btn btn-primary" type="submit">Submit Your Taco</button>
 
         </div>
     </div>
