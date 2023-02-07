@@ -2,6 +2,7 @@ package com.tacocloud.tacos;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tacocloud.tacos.domain.TacoOrder;
+import com.tacocloud.tacos.repository.TacoOrderRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @SessionAttributes("tacoOrder")
 public class OrderTacoController {
+	
+	
+	@Autowired
+	private TacoOrderRepository tacoOrderRepo;
+	
 	
 	@GetMapping("/current")
 	public String orderForm(@SessionAttribute TacoOrder tacoOrder) {
@@ -41,6 +48,8 @@ public class OrderTacoController {
 			return "orderForm";
 		}
 		log.info("Order info: {}", tacoOrder);
+		
+		tacoOrderRepo.save(tacoOrder);
 		
 		sessionStatus.setComplete();
 		
