@@ -24,13 +24,13 @@ public class Taco {
 	
 	
 	@NotNull
-	@Size(min = 5)
+	@Size(min = 5, message = "Your taco name must be at least 5 character long")
 	private String name;
 	
 	
 	private Date createdAt = new Date();
 	
-	@Size(min = 1)
+	@Size(min = 1, message = "You must choose at least 1 ingredient for your taco")
 	@ManyToMany()
 	private List<Ingredient> ingredients;
 	

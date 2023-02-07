@@ -39,8 +39,19 @@
  				<div class="row">
             		<h4>Name your taco creation:</h4>
             		<input th:field="*{name}" type="text" name="" id="">
+            		
         		</div>
         		
+        		<div class="row">
+	        		<small id="helpId" class="text-muted"
+	            			th:if="${#fields.hasErrors('name')}"
+	            			th:errors="*{name}">Help text</small>
+        		</div>
+        		<div class="row">
+	        		<small id="helpId" class="text-muted"
+	            			th:if="${#fields.hasErrors('ingredients')}"
+	            			th:errors="*{ingredients}">Help text</small>
+        		</div>
             </form>
         </div>
 
