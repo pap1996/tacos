@@ -3,6 +3,7 @@ package com.tacocloud.tacos;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,9 +35,9 @@ public class OrderTacoController {
 	
 	
 	@PostMapping
-	public String processOrder(SessionStatus sessionStatus, @Valid TacoOrder tacoOrder, Errors errors) {
+	public String processOrder(SessionStatus sessionStatus, @Valid TacoOrder tacoOrder, BindingResult bindingResult) {
 		
-		if (errors.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			return "orderForm";
 		}
 		log.info("Order info: {}", tacoOrder);
