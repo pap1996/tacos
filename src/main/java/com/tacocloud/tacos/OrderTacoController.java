@@ -3,10 +3,13 @@ package com.tacocloud.tacos;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.tacocloud.tacos.domain.TacoOrder;
+import com.tacocloud.tacos.domain.User;
 import com.tacocloud.tacos.repository.TacoOrderRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,13 +33,29 @@ public class OrderTacoController {
 	private TacoOrderRepository tacoOrderRepo;
 	
 	
+	@ModelAttribute(name = "user")
+	public User getAuthenUser(@AuthenticationPrincipal User user) {
+		return user;
+	};
+	
+	
 	@GetMapping("/current")
-	public String orderForm(@SessionAttribute TacoOrder tacoOrder) {
+	public String orderForm(@SessionAttribute TacoOrder tacoOrder, @ModelAttribute User user) {
 		
 		
-		tacoOrder.getTacos().stream().forEach(x -> {
-			log.info("In tacoOrder in OrderController: {}", x);
-		});
+//		tacoOrder.getTacos().stream().forEach(x -> {
+//			log.info("In tacoOrder in OrderController: {}", x);
+//		});
+		
+		
+		log.info("User authen {}", user);
+		
+		tacoOrder.setUser(user);
+		tacoOrder.setDeliveryName(user.getFullname());
+		tacoOrder.setDeliveryStreet(user.getStreet());
+		
+		log.info("Taco Order {}", tacoOrder);
+		
 		
 		return "orderForm";
 	}
