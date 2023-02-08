@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -23,6 +24,7 @@ import com.tacocloud.tacos.domain.Ingredient;
 import com.tacocloud.tacos.domain.Ingredient.Type;
 import com.tacocloud.tacos.domain.Taco;
 import com.tacocloud.tacos.domain.TacoOrder;
+import com.tacocloud.tacos.domain.User;
 import com.tacocloud.tacos.repository.IngredientRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +38,16 @@ public class DesignTacoController {
 	@Autowired
 	private IngredientRepository ingredientRepository;
 	
+	
+	@ModelAttribute(name = "user")
+	public User getAuthenUser(@AuthenticationPrincipal User user) {
+		return user;
+	};
+	/* Two way -  
+	 * W1: get User from SecurityContext and pass a model Attribute in Controller -> access in view Thymeleaf
+	 * W2: add more dependencies related to Thymeleaf -> just use predefined object in Thymeleaf #authentication....
+	 * read more at https://stackoverflow.com/questions/27957906/spring-boot-and-thymeleaf-using-the-authentication-utility
+	 * */
 	
 	/* NOTES: change from add each ingredient into a hashmap -> reduce repeated div in html */
 	@ModelAttribute
@@ -69,7 +81,7 @@ public class DesignTacoController {
 	}
 	
 	@GetMapping
-	public String showDesignForm() {
+	public String showDesignForm(Model model) {
 		return "design";
 	}
 

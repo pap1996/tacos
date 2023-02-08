@@ -15,6 +15,10 @@
 <body>
 
     <div class="container">
+    
+    	<div class="row">
+            <h1>Welcome <span th:text="${user.fullname}"></span></h1>
+        </div>
         <div class="row">
             <h1 >Design your taco!</h1>
         </div>
@@ -24,7 +28,7 @@
         </div>
 
         <div class="row">
-            <form id="designTacos" class="w-100 container" action="" method="post" th:object="${taco}">
+            <form id="designTacos" method="post" class="w-100 container" th:action="@{/design}" th:object="${taco}">
                 <div class="row" >
                     <div class="col-6" th:each="ingre : ${ingreMap}">
                         <h3>Designate your <span th:text="${ingre.key}"></span>:</h3>
