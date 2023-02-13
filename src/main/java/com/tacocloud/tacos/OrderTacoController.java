@@ -53,6 +53,9 @@ public class OrderTacoController {
 		tacoOrder.setUser(user);
 		tacoOrder.setDeliveryName(user.getFullname());
 		tacoOrder.setDeliveryStreet(user.getStreet());
+		tacoOrder.setDeliveryCity(user.getCity());
+		tacoOrder.setDeliveryState(user.getState());
+		tacoOrder.setDeliveryZip(user.getZip());
 		
 		log.info("Taco Order {}", tacoOrder);
 		
